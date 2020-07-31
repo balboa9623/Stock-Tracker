@@ -1,0 +1,22 @@
+{% extends "transfers/transfer_base.html" %}
+{% block pre_transfer %}
+    <div>
+        <h1>Welcome {{ app_user.username }}</h1>
+    </div>
+{% endblock %}
+
+{% block transfer_content %}
+    <div class="col-md-8">
+        {% for transactions in app_user %}
+            <div id="carousel-slide" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item">
+                        <a href="{% url 'transfers:single' username=transactions.user.username pk=transactions.pk %}">{{ transactions.transfer_amount }}</a>
+                    </div>
+                </div>
+            </div>
+{#            <a href="{% url 'transfers:single' username=app_user.user.username pk=app_user.pk %}">{{ app_user.transfer_amount }}</a> #}
+        {% endfor %}
+        
+    </div>
+{% endblock %}

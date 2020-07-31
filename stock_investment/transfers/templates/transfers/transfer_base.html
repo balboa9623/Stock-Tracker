@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="transfer_list_page">
+        <div class="container">
+            {% block pre_transfer %}{% endblock %}
+            {% block transfer_content %}{% endblock %}
+            {% block post_transfer %}{% endblock %}
+        </div>
+    </div>
+
+{% endblock %}

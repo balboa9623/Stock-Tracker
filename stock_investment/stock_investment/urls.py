@@ -25,5 +25,8 @@ urlpatterns = [
     # 'django.contrib.auth.urls': Allows us to connect to django's built-in authorisations
     path('accounts/', include('django.contrib.auth.urls')),
     # path('trade_details/', include('trade_details.urls')),
+
+    path('transfers/', include('transfers.urls', namespace='transfers')),
+
     path('admin/', admin.site.urls),
 ]
