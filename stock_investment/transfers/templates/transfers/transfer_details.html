@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-{#      THIS FILE IS FOR DISPLAYING A PARTICULAR USERS TRANSACTION DETAILS      #}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'transfers/transfer_base.html' %}
+{#  Displays a user's particular transaction    #}
+{% block transfer_content %}
+    <div class="col-md-8">
+        {% include 'transfers/_apptransfer.html' %}
+    </div>
+{% endblock %}

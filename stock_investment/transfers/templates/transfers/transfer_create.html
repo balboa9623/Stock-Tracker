@@ -1,11 +1,12 @@
-<!DOCTYPE html>
+{% extends 'transfers/transfer_base.html' %}
 {#      THIS FORM IS FOR ADDING NEW TRANSACTIONS        #}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% load bootstrap3 %}
+{% block transfer_content %}
+    <h3>Create a new transaction</h3>
+    <form id="newTransferForm" action="{% url 'transfers:new_transfer' %}"  method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" value="Add" class="btn btn-primary">
+    </form>
+{% endblock %}
 
-</body>
-</html>

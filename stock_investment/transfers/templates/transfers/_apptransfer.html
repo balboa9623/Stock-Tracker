@@ -1,0 +1,27 @@
+<div class="apptransfer media">
+{#    <h5 class="media-heading">#}
+{#        <span class="username">#}
+{#            <a href="{% url 'transfers:user_all' username = apptransfer.user.username %}"></a>#}
+{#        </span>#}
+{#    </h5>#}
+
+    <div class="media-footer">
+        {#  'apptransfer' is an object created by django when the model is created.  #}
+        {#   It takes the model name and converts it to all lower case.   #}
+        {% if user.is_authenticated and apptransfer.user == user %}
+            <p>
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
+                    {{ apptransfer.transfer_amount }}
+                </a>
+            </p>
+            <div class="collapse" id="collapse">
+                <div class="card card-body">
+                    <p>Date initiated:  {{ apptransfer.date_initiated }}</p>
+                    <p>Date fulfilled:  {{ apptransfer.date_fulfilled }}</p>
+                </div>
+            </div>
+
+        {% endif %}
+    </div>
+
+</div>
