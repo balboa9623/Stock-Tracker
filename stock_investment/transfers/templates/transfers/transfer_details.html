@@ -3,5 +3,7 @@
 {% block transfer_content %}
     <div class="col-md-8">
         {% include 'transfers/_apptransfer.html' %}
+        <a class="btn btn-primary" href="{% url 'transfers:new_transfer' %}">New transfer</a>
+        <a class="btn btn-primary" style="margin-left: 10px" href="{% url 'home' %}">Close</a>
     </div>
 {% endblock %}

@@ -9,17 +9,19 @@
         {#  'apptransfer' is an object created by django when the model is created.  #}
         {#   It takes the model name and converts it to all lower case.   #}
         {% if user.is_authenticated and apptransfer.user == user %}
-            <p>
-                <a class="btn btn-primary" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
-                    {{ apptransfer.transfer_amount }}
-                </a>
-            </p>
-            <div class="collapse" id="collapse">
-                <div class="card card-body">
-                    <p>Date initiated:  {{ apptransfer.date_initiated }}</p>
-                    <p>Date fulfilled:  {{ apptransfer.date_fulfilled }}</p>
-                </div>
+            <div class="list_group">
+                <ul class="list-group">
+                    <li class="list-group-item active">{{ apptransfer.transfer_amount }}</li>
+                    <li class="list-group-item">Date initiated:  {{ apptransfer.date_initiated }}</li>
+                    <li class="list-group-item">Date fulfilled:  {{ apptransfer.date_fulfilled }}</li>
+                </ul>
             </div>
+
+{#            <script>#}
+{#                document.getElementById("collapse").onclick = function () {#}
+{#                    alert("Hello ")#}
+{#                }#}
+{#            </script>#}
 
         {% endif %}
     </div>

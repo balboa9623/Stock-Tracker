@@ -7,20 +7,30 @@ from .models import AppTransfer
 from django import forms
 from braces.views import SelectRelatedMixin
 from django.contrib.auth import get_user_model
+
 User = get_user_model()
 
+
 # Create your views here.
-class UserTransferList(LoginRequiredMixin, generic.ListView):
+class AllTransactionList(LoginRequiredMixin, generic.ListView):
     model = AppTransfer
     template_name = 'transfers/user_transfer_list.html'
     # For future reference: get_queryset() is used to run a specific query on the database.
     # Here, the query retrieves the transactions make by the currently active user.
-    # def get_queryset(self):
-    #     try:
+    def get_queryset(self):
+        try:
+            self.app_user = User.objects.prefetch_related('app_user').get(username__iexact=self.kwargs.get('username'))
+        except:
+            raise Http404
+        else:return self.app_user.app_user.all()
+
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context['app_user'] = self.app_user
+            return context
 
 
-
-class CreateTransferView(LoginRequiredMixin, generic.CreateView, SelectRelatedMixin):
+class CreateNewTransfer(LoginRequiredMixin, generic.CreateView, SelectRelatedMixin):
     # don't need to handle login_url here. It is taken care of
     # in the settings.py file
     fields = ('transfer_amount', 'date_initiated', 'date_fulfilled')
@@ -35,8 +45,7 @@ class CreateTransferView(LoginRequiredMixin, generic.CreateView, SelectRelatedMi
         return super().form_valid(form)
 
 
-
-class TransferDetailsView(LoginRequiredMixin, generic.DetailView):
+class TransferDetails(LoginRequiredMixin, generic.DetailView):
     model = AppTransfer
     select_related = ('transfer_amount', 'date_initiated', 'date_fulfilled')
     template_name = 'transfers/transfer_details.html'
@@ -44,4 +53,3 @@ class TransferDetailsView(LoginRequiredMixin, generic.DetailView):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(user__username__iexact=self.kwargs.get('username'))
-

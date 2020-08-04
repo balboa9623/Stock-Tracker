@@ -14,3 +14,4 @@ class HomePage(TemplateView):
 
 class LoginPage(TemplateView):
     template_name = "home.html"
+
