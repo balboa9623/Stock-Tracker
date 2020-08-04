@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+import datetime
 
 # returns the user model that's currently active in this project.
 from django.contrib.auth import get_user_model
@@ -36,6 +38,15 @@ class AppTransfer(models.Model):
 
     def __str__(self):
         return f"{self.user}  |  {self.transfer_amount}"
+
+    def clean(self):
+        now = datetime.datetime.now().date()
+        if self.date_initiated > now and self.date_fulfilled > now:
+            raise ValidationError("DATE ERROR: Date field(s) cannot be a date in the future.")
+
+        if self.date_fulfilled < self.date_initiated:
+            raise ValidationError("DATE ERROR: The date in 'date initiated' should be a date prior to date in 'date "
+                                  "fulfilled.")
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
