@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'TradeDetails',
     'djmoney',
     'bootstrap3',
+    'bootstrap_datepicker_plus',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="details-page">
+        <div class="container">
+            {% block pre-trade-details %}{% endblock %}
+            {% block trade-details-content %}{% endblock %}
+            {% block post-trade-details %}{% endblock %}
+        </div>
+    </div>
+
+{% endblock %}

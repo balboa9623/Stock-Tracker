@@ -1,0 +1,13 @@
+{% extends 'TradeDetails/trade_base.html' %}
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{% block trade-details-content %}
+    <h2>Add new entry..</h2>
+    <form action="{% url 'TradeDetail:new' %}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" value="Submit" class="btn btn-primary btn-large">
+    </form>
+{% endblock %}

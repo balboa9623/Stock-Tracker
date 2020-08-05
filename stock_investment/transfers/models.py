@@ -4,10 +4,10 @@ import datetime
 
 # returns the user model that's currently active in this project.
 from django.contrib.auth import get_user_model
+User = get_user_model()  # gets objects off of the current user section
+
 from django.urls import reverse
 from djmoney.models.fields import MoneyField
-
-User = get_user_model()  # gets objects off of the current user section
 
 # Using custom template tag.
 from django import template
