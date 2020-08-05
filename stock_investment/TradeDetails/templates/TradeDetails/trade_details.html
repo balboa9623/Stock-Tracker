@@ -1,0 +1,8 @@
+{% extends 'TradeDetails/trade_base.html' %}
+{% block trade-details-content %}
+    <div class="col-md-8">
+        {% include 'TradeDetails/_stockdetails.html' %}
+        <a class="btn btn-primary" href="{% url 'TradeDetail:new' %}">New trade</a>
+        <a class="btn btn-primary" style="margin-left: 10px" href="{% url 'home' %}">Close</a>
+    </div>
+{% endblock %}

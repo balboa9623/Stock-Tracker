@@ -51,9 +51,11 @@ class StockDetail(models.Model):
 
     def save(self, *args, **kwargs):
         # save profit by subtracting ending_price - starting_price
+        self.stock_name = self.stock_name.upper()
         sold = self.num_stocks_sold
         self.net_profit = (self.ending_price - self.starting_price) * sold
-        print(self.net_profit)
+        # print(self.net_profit)
+        # print(self.stock_name)
         super(StockDetail, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
