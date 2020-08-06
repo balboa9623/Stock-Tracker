@@ -1,0 +1,17 @@
+{% extends 'TradeDetails/trade_base.html' %}
+{% block pre-trade-details %}
+    <div>
+        <h1>Welcome {{ stock_user.username }}</h1>
+    </div>
+{% endblock %}
+
+{% block trade-details-content %}
+    <div class="col-md-8"> <!-- style="width: 18rem;" -->
+        <div>
+            <h2>All Stocks Details</h2>
+        </div>
+        {% for stockdetail in stockdetail_list %}
+            {% include 'TradeDetails/_stockdetails.html' %}
+        {% endfor %}
+    </div>
+{% endblock %}

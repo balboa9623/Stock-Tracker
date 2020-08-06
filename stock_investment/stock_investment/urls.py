@@ -28,7 +28,7 @@ urlpatterns = [
 
     path('transfers/', include('transfers.urls', namespace='transfers')),
 
-    path('trade', include('TradeDetails.urls', namespace='trade')),
+    path('trades/', include('TradeDetails.urls', namespace='trade')),
 
     path('admin/', admin.site.urls),
 ]

@@ -36,3 +36,22 @@ class SingleTradeDetails(LoginRequiredMixin, generic.DetailView):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(user__username__iexact=self.kwargs.get('username'))
+
+
+class AllTradeDetails(LoginRequiredMixin, generic.ListView):
+    model = models.StockDetail
+    template_name = 'TradeDetails/user_stock_list.html'
+
+    def get_queryset(self):
+        try:
+            self.stock_user = User.objects.prefetch_related('stock_user').get(
+                username__iexact=self.kwargs.get('username'))
+        except:
+            raise Http404
+        else:
+            return self.stock_user.stock_user.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['stock_user'] = self.stock_user
+        return context

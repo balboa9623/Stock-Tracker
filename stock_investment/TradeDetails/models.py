@@ -50,7 +50,7 @@ class StockDetail(models.Model):
         return f"{self.user.username}  |  {self.stock_name}  |  {self.date_sold}"
 
     def save(self, *args, **kwargs):
-        # save profit by subtracting ending_price - starting_price
+        # save profit by (ending_price - starting_price) * num_stocks_sold
         self.stock_name = self.stock_name.upper()
         sold = self.num_stocks_sold
         self.net_profit = (self.ending_price - self.starting_price) * sold

@@ -49,6 +49,7 @@
                 <ul class="nav navbar-nav navbar-right mr-auto mt-2 mt-lg-0">
                     {% if user.is_authenticated %}
                         <li class="nav-item"><a href="{% url 'trade:new' %}">New Trade</a></li>
+                        <li class="nav-item"><a href="{% url 'trade:all' username=user.username %}">All Trades</a></li>
                         <li class="nav-item"><a href="{% url 'transfers:new_transfer' %}">New Transfer</a></li>
                         <li class="nav-item"><a href="{% url 'transfers:user_all' username=user.username %}">View transactions</a></li>
                         <li class="nav-item"><a href="{% url 'accounts:logout' %}">Log out</a></li>

@@ -6,7 +6,6 @@
         {% if user.is_authenticated and stockdetail.user == user %}
             <div class="list_group">
                 <ul class="list-group">
-                    'stock_name', 'starting_price', 'ending_price', 'date_purchased', 'date_sold', 'net_profit
                     <li class="list-group-item active">{{ stockdetail.stock_name }}</li>
                     <li class="list-group-item">Starting price:  {{ stockdetail.starting_price }}</li>
                     <li class="list-group-item">Ending price:  {{ stockdetail.ending_price }}</li>

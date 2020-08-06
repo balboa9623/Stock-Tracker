@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-import datetime
+from datetime import datetime, date
 
 # returns the user model that's currently active in this project.
 from django.contrib.auth import get_user_model
@@ -28,25 +28,29 @@ register = template.Library()
 #   -> initiated date
 #   -> fulfilled date
 
+def validate_date(value):
+    today = date.today()
+    if value > today:
+        raise ValidationError("DATE ERROR: Date field(s) cannot be in the future.")
 
 # Transferred to app (from bank to app)
 class AppTransfer(models.Model):
     user = models.ForeignKey(User, related_name="app_user", on_delete=models.CASCADE)
     transfer_amount = MoneyField(max_digits=200, currency_choices=[('USD', '$ - USD')])  # , default_currency="USD")
-    date_initiated = models.DateField(auto_now=False, blank=False)
-    date_fulfilled = models.DateField(auto_now=False, blank=False)
+    date_initiated = models.DateField(auto_now=False, blank=False, validators=[validate_date], help_text="YYYY-MM-DD")
+    date_fulfilled = models.DateField(auto_now=False, blank=False, validators=[validate_date], help_text="YYYY-MM-DD")
 
     def __str__(self):
         return f"{self.user}  |  {self.transfer_amount}"
 
     def clean(self):
-        now = datetime.datetime.now().date()
-        if self.date_initiated > now and self.date_fulfilled > now:
-            raise ValidationError("DATE ERROR: Date field(s) cannot be a date in the future.")
+        # now = datetime.datetime.now().date()
+        # if self.date_initiated > now and self.date_fulfilled > now:
+        #     raise ValidationError("DATE ERROR: Date field(s) cannot be a date in the future.")
 
         if self.date_fulfilled < self.date_initiated:
             raise ValidationError("DATE ERROR: The date in 'date initiated' should be a date prior to date in 'date "
-                                  "fulfilled.")
+                                  "fulfilled'.")
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

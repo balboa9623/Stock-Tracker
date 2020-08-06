@@ -1,9 +1,4 @@
 {% extends "transfers/transfer_base.html" %}
-{% block pre_transfer %}
-{#    <div>#}
-{#        <h1>Welcome {{ apptransfer.user.username }}</h1>#}
-{#    </div>#}
-{% endblock %}
 
 {% block transfer_content %}
     <div class="col-md-8"> <!-- style="width: 18rem;" -->
@@ -13,7 +8,5 @@
         {% for apptransfer in apptransfer_list %}
             {% include 'transfers/_apptransfer.html' %}
         {% endfor %}
-
-
     </div>
 {% endblock %}
