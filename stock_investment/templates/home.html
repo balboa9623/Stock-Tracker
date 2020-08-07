@@ -2,4 +2,24 @@
 
 {% block content %}
     <h1>Welcome to Stock Investment Tracker..</h1>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Here are some latest news.</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        {% for new, des, img, url in lst %}
+            <div class="jumbotron">
+                <img src="{{ img }}" alt="Could not load image." style="height: 20%; width: 100%;">
+                <h2>{{ new }}</h2>
+                {{ value|linebreaks }}
+                <p>{{ des }}</p>
+                {{ value|linebreaks }}
+                <a href="{{ url }}">Read more</a>
+                {{ value|linebreaks }}
+            </div>
+        {% endfor %}
+
+    </div>
 {% endblock %}

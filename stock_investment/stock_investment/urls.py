@@ -19,7 +19,7 @@ from stock_investment import views
 
 urlpatterns = [
     # TODO - create a HOME PAGE with little to no functionality
-    path('', views.HomePage.as_view(), name='home'),
+    path('', views.HomePage, name='home'),
     path('test/', views.LoginPage.as_view(), name='loginHome'),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     # 'django.contrib.auth.urls': Allows us to connect to django's built-in authorisations
